@@ -1,2 +1,39 @@
-<h1>GeneralContractors#index</h1>
-<p>Find me in app/views/general_contractors/index.html.erb</p>
+<%= link_to 'New General contractor', new_general_contractor_path, class: "btn btn-success" %>
+
+<h1>General contractor List</h1>
+
+<div class="table-responsive">
+  <% if @general_contractors.present? %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Min Project Budget</th>
+        <th>Max Project Budget</th>
+        <th>Offers design services?</th>
+        <th>Offers build services?</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @general_contractors.each do |general_contractor| %>
+        <tr>
+          <td><%= general_contractor.longitude %></td>
+          <td><%= general_contractor.latitude %></td>
+          <td><%= general_contractor.min_project_budget %></td>
+          <td><%= general_contractor.max_project_budget %></td>
+          <td><%= general_contractor.is_offering_design_service ? 'Yes' : 'No' %></td>
+          <td><%= general_contractor.is_offering_build_service ? 'Yes' : 'No' %></td>
+          <td>
+            <%= link_to 'Show', general_contractor_path(general_contractor), class: "btn btn-primary" %>
+            <%= link_to 'Edit', edit_general_contractor_path(general_contractor), class: "btn btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No general_contractor created.</p>
+  <% end %>
+</div>

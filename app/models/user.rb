@@ -9,7 +9,7 @@ class User < ApplicationRecord
   end
     
   def is_contractor?
-    user_type == "general_contractor" ? true : false
+    user_type == "contractor" ? true : false
   end
     
   def is_admin?

@@ -1,0 +1,72 @@
+<%= form_for(@renovation_project, html: {class: "form-horizontal"}) do |f| %>
+  <% if @renovation_project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@renovation_project.errors.count, "error") %> prohibited this renovation_project from being saved:</h2>
+
+      <ul>
+        <% @renovation_project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :longitude, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :longitude, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :latitude, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :latitude, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :min_budget, 'Min Budget', class: "col-sm-2 control-label" %>  
+    <div class="col-sm-4 ">  
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <%= f.text_field :min_budget, class: 'form-control', placeholder: "Min Budget" %>   
+        <div class="input-group-addon">.00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :max_budget, 'Max Budget', class: "col-sm-2 control-label" %>  
+    <div class="col-sm-4 ">  
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <%= f.text_field :max_budget, class: 'form-control', placeholder: "Max Budget" %>   
+        <div class="input-group-addon">.00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :is_design_service_req, 'Design services needed?', class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.check_box :is_design_service_req %> <br/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :is_build_service_req, 'Build services needed?', class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.check_box :is_build_service_req %> <br/>
+    </div>
+  </div>
+
+  <%= f.hidden_field :owner_id, value: current_user.id %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type='submit' class='btn btn-success' >Submit</button>
+      <%= link_to 'Back', renovation_projects_path, class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

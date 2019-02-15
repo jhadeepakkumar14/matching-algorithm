@@ -1,2 +1,39 @@
-<h1>RenovationProjects#index</h1>
-<p>Find me in app/views/renovation_projects/index.html.erb</p>
+<%= link_to 'New Renovation Project', new_renovation_project_path, class: "btn btn-success" %>
+
+<h1>Renovation Project List</h1>
+
+<div class="table-responsive">
+  <% if @renovation_projects.present? %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Min Budget</th>
+        <th>Max Budget</th>
+        <th>Design services needed?</th>
+        <th>Build services needed?</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @renovation_projects.each do |renovation_project| %>
+        <tr>
+          <td><%= renovation_project.longitude %></td>
+          <td><%= renovation_project.latitude %></td>
+          <td><%= renovation_project.min_budget %></td>
+          <td><%= renovation_project.max_budget %></td>
+          <td><%= renovation_project.is_design_service_req ? 'Yes' : 'No' %></td>
+          <td><%= renovation_project.is_build_service_req ? 'Yes' : 'No' %></td>
+          <td>
+            <%= link_to 'Show', renovation_project_path(renovation_project), class: "btn btn-primary" %>
+            <%= link_to 'Edit', edit_renovation_project_path(renovation_project), class: "btn btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No renovation_project created.</p>
+  <% end %>
+</div>

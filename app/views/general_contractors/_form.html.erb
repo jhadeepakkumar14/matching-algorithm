@@ -1,0 +1,72 @@
+<%= form_for(@general_contractor, html: {class: "form-horizontal"}) do |f| %>
+  <% if @general_contractor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@general_contractor.errors.count, "error") %> prohibited this general_contractor from being saved:</h2>
+
+      <ul>
+        <% @general_contractor.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :longitude, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :longitude, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :latitude, class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :latitude, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :min_project_budget, 'Min Project Budget', class: "col-sm-2 control-label" %>  
+    <div class="col-sm-4 ">  
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <%= f.text_field :min_project_budget, class: 'form-control', placeholder: "Min Project Budget" %>   
+        <div class="input-group-addon">.00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :max_project_budget, 'Max Project Budget', class: "col-sm-2 control-label" %>  
+    <div class="col-sm-4 ">  
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <%= f.text_field :max_project_budget, class: 'form-control', placeholder: "Max Project Budget" %>   
+        <div class="input-group-addon">.00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :is_offering_design_service, 'Offers design services?', class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.check_box :is_offering_design_service %> <br/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :is_offering_build_service, 'Offers build services?', class: "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.check_box :is_offering_build_service %> <br/>
+    </div>
+  </div>
+
+  <%= f.hidden_field :contractor_id, value: current_user.id %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type='submit' class='btn btn-success' >Submit</button>
+      <%= link_to 'Back', general_contractors_path, class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

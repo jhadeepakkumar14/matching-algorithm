@@ -10,15 +10,18 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>  
-      <nav>
-          Home
-          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-      </nav>
-    <% end %>  
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <%= render 'shared/nav' %></br></br></br></br>
+    <div class="container">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+      </br></br></br>
+      <%= render 'shared/footer' %>
+    </div>
   </body>
 </html>
     

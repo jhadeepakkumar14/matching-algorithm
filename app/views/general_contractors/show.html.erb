@@ -1,2 +1,34 @@
-<h1>GeneralContractors#show</h1>
-<p>Find me in app/views/general_contractors/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @general_contractor.longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @general_contractor.latitude %>
+</p>
+
+<p>
+  <strong>Min Project Budget:</strong>
+  <%= @general_contractor.min_project_budget %>
+</p>
+
+<p>
+  <strong>Max Project Budget:</strong>
+  <%= @general_contractor.max_project_budget %>
+</p>
+
+<p>
+  <strong>Offers design services?:</strong>
+  <%= @general_contractor.is_offering_design_service ? 'Yes' : 'No' %>
+</p>
+
+<p>
+  <strong>Offers build services?:</strong>
+  <%= @general_contractor.is_offering_build_service ? 'Yes' : 'No' %>
+</p>
+
+<%= link_to 'Edit', edit_general_contractor_path(@general_contractor), class: 'btn btn-primary' %>
+<%= link_to 'Back', general_contractors_path, class: 'btn btn-primary' %>

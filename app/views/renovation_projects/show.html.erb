@@ -1,2 +1,34 @@
-<h1>RenovationProjects#show</h1>
-<p>Find me in app/views/renovation_projects/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @renovation_project.longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @renovation_project.latitude %>
+</p>
+
+<p>
+  <strong>Min Project Budget:</strong>
+  <%= @renovation_project.min_budget %>
+</p>
+
+<p>
+  <strong>Max Project Budget:</strong>
+  <%= @renovation_project.max_budget %>
+</p>
+
+<p>
+  <strong>Offers design services?:</strong>
+  <%= @renovation_project.is_design_service_req ? 'Yes' : 'No' %>
+</p>
+
+<p>
+  <strong>Offers build services?:</strong>
+  <%= @renovation_project.is_build_service_req ? 'Yes' : 'No' %>
+</p>
+
+<%= link_to 'Edit', edit_renovation_project_path(@renovation_project), class: 'btn btn-primary' %>
+<%= link_to 'Back', renovation_projects_path, class: 'btn btn-primary' %>

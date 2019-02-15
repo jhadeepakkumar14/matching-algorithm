@@ -1,9 +1,11 @@
 class GeneralContractorsController < ApplicationController
+  before_action :authenticate_user!    
+  before_action :set_general_contractors, only: [:show, :edit, :update, :destroy]
+
   def index
-    @general_contractors = GeneralContractor.all  
+    @general_contractors = GeneralContractor.all
   end
 
-  # GET /company/1
   def show
   end
 
@@ -11,67 +13,51 @@ class GeneralContractorsController < ApplicationController
     @general_contractor = GeneralContractor.new
   end
 
+  def edit
+  end
+
   def create
-    if @general_contractor.save
-      respond_to do |format|
-        format.html {
-          flash[:notice] = "General Contractor created successfully."
-          redirect_to company_path(@company)
-        }
-        format.api { render :action => 'show', :status => :created, :location => company_url(@company) }
-      end
-    else
-      respond_to do |format|
-        format.html { render :action => 'new' }
-        format.api { render_validation_errors(@company) }
+    @general_contractor = GeneralContractor.new(general_contractor_params)
+
+    respond_to do |format|
+      if @general_contractor.save
+        format.html { redirect_to @general_contractor, notice: 'General Contractor was successfully created.' }
+        format.json { render :show, status: :created, location: @general_contractor }
+      else
+        format.html { render :new }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def edit
-  end
-
   def update
-    @company.safe_attributes = params[:company]
-
-    if @company.save
-      respond_to do |format|
-        format.html {
-          flash[:notice] = l(:notice_successful_update)
-          redirect_to company_path(@company)
-        }
-        format.api  { render_api_ok }
-      end
-    else
-      respond_to do |format|
-        format.html { render :action => :edit }
-        format.api  { render_validation_errors(@company) }
+    respond_to do |format|
+      if @general_contractor.update(general_contractor_params)
+        format.html { redirect_to @general_contractor, notice: 'General Contractor was successfully updated.' }
+        format.json { render :show, status: :ok, location: @general_contractor }
+      else
+        format.html { render :edit }
+        format.json { render json: @general_contractor.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @company.destroy
+    @general_contractor.destroy
     respond_to do |format|
-      format.html { redirect_back_or_default(companies_path) }
-      format.api  { render_api_ok }
+      format.html { redirect_to general_contractors_url, notice: 'General Contractor was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_company
-    @company = Company.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render_404
+  def set_general_contractors
+    @general_contractor = GeneralContractor.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
-  def company_params
-    params.require(:company).permit(:name, :email, :phone, :address, :is_user, :pan, :adhar)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def general_contractor_params
+    params.require(:general_contractor).permit(:latitude, :longitude, :min_project_budget, :max_project_budget, :is_offering_design_service, :is_offering_build_service, :contractor_id)
   end
-    # Only allow a trusted parameter "white list" through.
-    def company_params
-      params.require(:company).permit(:name, :address, :email, :phone, :state, :country, :zip, :pan, :gst, :other_info, :contact_id, :relation_type_id)
-    end
 end
