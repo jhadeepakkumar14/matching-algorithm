@@ -1,0 +1,2 @@
+module RenovationProjectsHelper
+end

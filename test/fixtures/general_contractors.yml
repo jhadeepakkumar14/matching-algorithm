@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  latitude: 1.5
+  longitude: 1.5
+  min_project_budget: 1.5
+  max_project_budget: 1.5
+  is_offering_design_ser: false
+  is_offering_build_service: 1.5
+
+two:
+  latitude: 1.5
+  longitude: 1.5
+  min_project_budget: 1.5
+  max_project_budget: 1.5
+  is_offering_design_ser: false
+  is_offering_build_service: 1.5

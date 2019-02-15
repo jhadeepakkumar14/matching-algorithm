@@ -1,0 +1,11 @@
+<% if current_user.is_contractor? %>
+    <p>I'm a General Contractor</p>
+<% end %>
+
+<% if current_user.is_owner? %>
+    <p>I'm a Owner</p>
+<% end %>
+
+<% if current_user.is_admin? %>
+    <p>I'm a Admin</p>
+<% end %>
