@@ -38,7 +38,7 @@ gem 'devise'
 gem "font-awesome-rails"
 gem 'jquery-rails'
 gem "letter_opener", :group => :development
-gem 'pundit'
+gem 'access-granted', '~> 1.1.0'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS

@@ -30,5 +30,50 @@
   <%= @renovation_project.is_build_service_req ? 'Yes' : 'No' %>
 </p>
 
+<hr>
+
+<h1>Matched General Contractors</h1>
+
+<div class="table-responsive matched_general_contractors">
+  <% if @general_contractors.present? %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Min Project Budget</th>
+        <th>Max Project Budget</th>
+        <th>Offers design services?</th>
+        <th>Offers build services?</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @general_contractors.each do |general_contractor| %>
+        <tr>
+          <td><%= general_contractor.longitude %></td>
+          <td><%= general_contractor.latitude %></td>
+          <td><%= general_contractor.min_project_budget %></td>
+          <td><%= general_contractor.max_project_budget %></td>
+          <td><%= general_contractor.is_offering_design_service ? 'Yes' : 'No' %></td>
+          <td><%= general_contractor.is_offering_build_service ? 'Yes' : 'No' %></td>
+          <td>
+            <% if status_accepted(@renovation_project, general_contractor.id) == 'Accepted' %>
+              <h5>Accepted</h5>
+            <% elsif status_accepted(@renovation_project, general_contractor.id) == 'Rejected' %>
+              <h5>Rejected</h5>
+            <% else %>
+              <%= link_to 'Yes', update_status_renovation_project_path(@renovation_project, gc: general_contractor.id, owner_accept: true), class: "btn btn-success" %>
+              <%= link_to 'No', update_status_renovation_project_path(@renovation_project, gc: general_contractor.id, owner_reject: true), class: "btn btn-warning" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No general_contractor created.</p>
+  <% end %>
+
 <%= link_to 'Edit', edit_renovation_project_path(@renovation_project), class: 'btn btn-primary' %>
 <%= link_to 'Back', renovation_projects_path, class: 'btn btn-primary' %>

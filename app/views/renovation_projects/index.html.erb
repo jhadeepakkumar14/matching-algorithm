@@ -26,8 +26,12 @@
           <td><%= renovation_project.is_design_service_req ? 'Yes' : 'No' %></td>
           <td><%= renovation_project.is_build_service_req ? 'Yes' : 'No' %></td>
           <td>
-            <%= link_to 'Show', renovation_project_path(renovation_project), class: "btn btn-primary" %>
             <%= link_to 'Edit', edit_renovation_project_path(renovation_project), class: "btn btn-primary" %>
+            <% if renovation_project.is_matched %>
+              <%= link_to 'Show Matches', renovation_project_path(renovation_project), class: "btn btn-primary" %>
+            <% else %>
+              <%= link_to 'Find Matches', renovation_project_path(renovation_project, find_matches: true), class: "btn btn-primary" %>              
+            <% end %>  
           </td>
         </tr>
       <% end %>

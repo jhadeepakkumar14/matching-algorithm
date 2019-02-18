@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_184150) do
+ActiveRecord::Schema.define(version: 2019_02_17_184056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,22 @@ ActiveRecord::Schema.define(version: 2019_02_15_184150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "contractor_id"
+    t.integer "engaged_with", default: 0
+    t.integer "rank", default: 1
     t.index ["contractor_id"], name: "index_general_contractors_on_contractor_id"
+  end
+
+  create_table "matching_gcs", force: :cascade do |t|
+    t.bigint "renovation_project_id"
+    t.bigint "general_contractor_id"
+    t.boolean "is_owner_accepted"
+    t.boolean "is_owner_rejected"
+    t.boolean "is_contractor_accepted"
+    t.boolean "is_contractor_rejected"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["general_contractor_id"], name: "index_matching_gcs_on_general_contractor_id"
+    t.index ["renovation_project_id"], name: "index_matching_gcs_on_renovation_project_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -74,6 +89,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_184150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "owner_id"
+    t.boolean "is_matched", default: false, null: false
     t.index ["owner_id"], name: "index_renovation_projects_on_owner_id"
   end
 

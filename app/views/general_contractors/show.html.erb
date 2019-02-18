@@ -30,5 +30,49 @@
   <%= @general_contractor.is_offering_build_service ? 'Yes' : 'No' %>
 </p>
 
+<h1>Renovation Project List</h1>
+
+<div class="table-responsive">
+  <% if @renovation_projects.present? %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Min Budget</th>
+        <th>Max Budget</th>
+        <th>Design services needed?</th>
+        <th>Build services needed?</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @renovation_projects.each do |renovation_project| %>
+        <tr>
+          <td><%= renovation_project.longitude %></td>
+          <td><%= renovation_project.latitude %></td>
+          <td><%= renovation_project.min_budget %></td>
+          <td><%= renovation_project.max_budget %></td>
+          <td><%= renovation_project.is_design_service_req ? 'Yes' : 'No' %></td>
+          <td><%= renovation_project.is_build_service_req ? 'Yes' : 'No' %></td>
+          <td>
+            <% if status_accepted_gc(renovation_project, @general_contractor.id) == 'Accepted' %>
+              <h5>Accepted</h5>
+            <% elsif status_accepted_gc(renovation_project, @general_contractor.id) == 'Rejected' %>
+              <h5>Rejected</h5>
+            <% else %>
+              <%= link_to 'Yes', update_status_general_contractor_path(@general_contractor, rp: renovation_project.id, contractor_accept: true), class: "btn btn-success" %>
+              <%= link_to 'No', update_status_general_contractor_path(@general_contractor, rp: renovation_project.id, contractor_reject: true), class: "btn btn-warning" %>
+            <% end %> 
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No renovation_project created.</p>
+  <% end %>
+</div>
+
 <%= link_to 'Edit', edit_general_contractor_path(@general_contractor), class: 'btn btn-primary' %>
 <%= link_to 'Back', general_contractors_path, class: 'btn btn-primary' %>
