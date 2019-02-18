@@ -4,7 +4,6 @@ class GeneralContractorsController < ApplicationController
 
   def index
     @general_contractors = GeneralContractor.where(contractor_id: current_user.id)
-    authorize! :index, @general_contractors.first
   end
 
   def show

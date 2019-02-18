@@ -6,7 +6,6 @@ class RenovationProjectsController < ApplicationController
 
   def index
     @renovation_projects = RenovationProject.where(owner_id: current_user.id)
-    authorize! :index, @renovation_projects.first
   end
 
   def show
