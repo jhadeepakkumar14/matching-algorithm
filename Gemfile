@@ -37,7 +37,7 @@ gem 'activeadmin'
 gem 'devise'
 gem "font-awesome-rails"
 gem 'jquery-rails'
-gem "letter_opener"
+gem "letter_opener", :group => :development
 gem 'access-granted', '~> 1.1.0'
 
 gem "therubyracer"

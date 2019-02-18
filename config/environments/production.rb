@@ -92,9 +92,20 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'https://sweeten-matching-algo.herokuapp.com/' }
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.default_url_options = { host: 'sweeten-matching-algo.herokuapp.com' }
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_options = { from: 'noreply@sweeten.com' }
+
+  config.action_mailer.smtp_settings = {
+    domain: 'sweeten-matching-algo.herokuapp.com',
+    user_name: 'jhadeepakkumar1414',
+    password: 'facbok123789',
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   config.serve_static_assets = true
   config.assets.digest = true
